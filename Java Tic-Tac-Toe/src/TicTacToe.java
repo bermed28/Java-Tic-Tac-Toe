@@ -27,35 +27,40 @@ public class TicTacToe {
 
 			System.out.println("Choose a place to make your move (1-9): ");
 			Scanner userInp = new Scanner(System.in);
-			int userPos = userInp.nextInt();
-
-			while (playerPositions.contains(userPos) || cpuPositions.contains(userPos)) {
-				System.out.println("Position Taken! Choose Another Position");
-				userPos = userInp.nextInt();
-			}
-
-			play(gameBoard, userPos, "player");
-			String results = checkWinner();
+			try {
+				int userPos = userInp.nextInt();
 			
-			if (results.length() > 0 ) {
-				System.out.println(results);
-				break;
-			}
-			
-			Random rand = new Random();
-			int cpuPos = rand.nextInt(9) + 1;
-
-			while (playerPositions.contains(cpuPos) || cpuPositions.contains(cpuPos)) {
-				cpuPos = rand.nextInt(9) + 1;
-
-			}
-			play(gameBoard, cpuPos, "cpu");
-			printGameBoard(gameBoard);
-			
-			results = checkWinner();
-			if (results.length() > 0 ) {
-				System.out.println(results);
-				break;
+				while (playerPositions.contains(userPos) || cpuPositions.contains(userPos)) {
+					System.out.println("Position Taken! Choose Another Position");
+					userPos = userInp.nextInt();
+				}
+	
+				play(gameBoard, userPos, "player");
+				String results = checkWinner();
+				
+				if (results.length() > 0 ) {
+					System.out.println(results);
+					break;
+				}
+				
+				Random rand = new Random();
+				int cpuPos = rand.nextInt(9) + 1;
+	
+				while (playerPositions.contains(cpuPos) || cpuPositions.contains(cpuPos)) {
+					cpuPos = rand.nextInt(9) + 1;
+	
+				}
+				play(gameBoard, cpuPos, "cpu");
+				printGameBoard(gameBoard);
+				
+				results = checkWinner();
+				if (results.length() > 0 ) {
+					System.out.println(results);
+					break;
+				}
+			} catch(Exception e) {
+				System.out.println("Invalid Input! Please Select a Number 1-9");
+				continue;
 			}
 
 		}
